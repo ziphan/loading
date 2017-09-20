@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Loading</title>
+  <style>
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 10px;
+      background: red;
+      transition-duration: 100ms;
+    }
+
+    .img {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="loading"></div>
+<img class="img" src="http://www.33lc.com/article/UploadPic/2012-7/20127291061564636.jpg">
+<img class="img" src="http://pic1.win4000.com/wallpaper/2/57e0fc465d511.jpg">
+<img class="img" src="http://pic1.win4000.com/wallpaper/9/57e33bf18a5b2.jpg">
+<img class="img" src="http://pic1.win4000.com/wallpaper/9/57e33bf3c2b84.jpg">
+<img class="img" src="http://pic1.win4000.com/wallpaper/9/57e33bf5d5228.jpg">
+<img class="img" src="http://pic1.win4000.com/wallpaper/9/57e33bf78aa03.jpg">
+<script>
+  const loading = document.querySelector('.loading');
+  const images = document.querySelectorAll('img');
+  let n = 0;
+  images.forEach(item => {
+    let img = new Image();
+    img.onload = () => {
+      n++;
+      loading.style.width = parseInt(n / images.length * 100) + '%';
+    };
+    img.src = item.src;
+  })
+</script>
+</body>
+</html>

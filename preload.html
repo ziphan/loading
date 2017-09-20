@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Preload</title>
+  <style>
+    .box {
+      width: 800px;
+      margin: 0 auto;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    p {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <img src="http://pic1.win4000.com/wallpaper/2/57e0fc465d511.jpg">
+  <p>
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+  </p>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="preload.js"></script>
+<script>
+  const imgs = [
+    'http://pic1.win4000.com/wallpaper/2/57e0fc465d511.jpg',
+    'http://pic1.win4000.com/wallpaper/9/57e33bf18a5b2.jpg',
+    'http://pic1.win4000.com/wallpaper/9/57e33bf3c2b84.jpg',
+    'http://pic1.win4000.com/wallpaper/9/57e33bf5d5228.jpg',
+    'http://pic1.win4000.com/wallpaper/9/57e33bf78aa03.jpg',
+  ];
+
+  $.preload(imgs, {
+    each(count) {
+
+    },
+    all() {
+      document.title = `1/${imgs.length}`;
+    }
+  });
+
+  const img = document.querySelector('img');
+  const length = imgs.length;
+  const p = document.querySelector('p');
+  let index = 0;
+  document.title = index + 1 + '/' + imgs.length;
+  p.addEventListener('click', e => {
+    const t = e.target;
+    if (t === prev) {
+      index = Math.max(0, --index);
+    } else if (t === next) {
+      index = Math.min(length - 1, ++index);
+    }
+    document.title = index + 1 + '/' + imgs.length;
+    img.src = imgs[index];
+  });
+</script>
+</body>
+</html>
